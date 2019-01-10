@@ -10,6 +10,7 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const methodOverride = require("method-override");
 const seedDB = require("./seeds");
+require("dotenv").config();
 
 
 //-------Requiring Routes-------------//
@@ -20,8 +21,11 @@ const indexRoutes = require("./routes/index");
 
 //seedDB();
 
+let url = process.env.DATABASEURL
+mongoose.connect(url, { useNewUrlParser: true });
+
 //mongoose.connect("mongodb://localhost/yelp_camp", { useNewUrlParser: true });
-mongoose.connect("mongodb://yelpcampadmin:p123456@ds153314.mlab.com:53314/yelp_camp");
+//mongoose.connect("mongodb://yelpcampadmin:p123456@ds153314.mlab.com:53314/yelp_camp");
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
